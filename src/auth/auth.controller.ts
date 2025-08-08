@@ -30,7 +30,7 @@ export class AuthController {
       newUser.username,
       newUser.password,
     );
-    res.cookie('jwt', access_token, { httpOnly: true, secure: false });
+    res.cookie('jwt', access_token, {httpOnly: true, secure: true , sameSite: 'none' });
     return { message: 'User registered and logged in' };
   }
 
@@ -43,7 +43,7 @@ export class AuthController {
       loginData.username,
       loginData.password,
     );
-    res.cookie('jwt', access_token, { httpOnly: true, secure: false });
+    res.cookie('jwt', access_token, { httpOnly: true, secure: true , sameSite: 'none'});
     return { message: 'Login successful', access_token };
   }
 
