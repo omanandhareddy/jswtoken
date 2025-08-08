@@ -52,7 +52,7 @@ export class AuthController {
   getProfile(@Request() req: any) {
     return req.user;
   }
-
+// changes made
 @UseGuards(AuthGuard)
 @Patch('update')
 async updateUser(
