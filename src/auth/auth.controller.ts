@@ -106,11 +106,11 @@ async addToFavourites(@Request() req: any, @Body() comic: any) {
 
 @UseGuards(AuthGuard)
 @Patch('favourites/remove')
-async removeFavourite(@Request() req: any, @Body('id') comicId: number) {
+async removeFavourite(@Request() req: any, @Body('title') Comictitle: string) {
   const user = await this.usersService.findOne(req.user.username);
   if (!user) return { message: 'User not found' };
 
-  const updatedFavourites = user.favourites.filter((comic: any) => comic.id !== comicId);
+  const updatedFavourites = user.favourites.filter((comic: any) => comic.title !== Comictitle);
   await this.usersService.updateFavourites(user.username, updatedFavourites);
 
   return { message: 'Removed from favourites' };
