@@ -95,13 +95,13 @@ async addToFavourites(@Request() req: any, @Body() comic: any) {
   const user = await this.usersService.findOne(req.user.username);
   if (!user) return { message: 'User not found' };
 
-  const alreadyExists = user.favourites?.some((c: any) => c.id === comic.id);
+  const alreadyExists = user.favourites?.some((c: any) => c.title === comic.title);
   if (!alreadyExists) {
     user.favourites.push(comic);
     await this.usersService.updateFavourites(user.username, user.favourites);
   }
 
-  return { message: 'Added to favourites' };
+  return { message: 'Added to favourites' }; 
 }
 
 @UseGuards(AuthGuard)
