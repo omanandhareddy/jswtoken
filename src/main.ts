@@ -5,12 +5,16 @@ import * as cookieParser from 'cookie-parser';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   
-  // Enable CORS
+  // Enable CORS for both production and development
   app.enableCors({
-     origin: 'https://comicverseproject.onrender.com',
-    credentials: true, 
+    origin: [
+      'http://localhost:4000',  
+      'https://comicverseproject.onrender.com'  // Production
+    ],
+    credentials: true,
   });
+  
   app.use(cookieParser());
- await app.listen(process.env.PORT ?? '0.0.0.0');
+  await app.listen(process.env.PORT ?? 3000, '0.0.0.0');
 }
 bootstrap();
